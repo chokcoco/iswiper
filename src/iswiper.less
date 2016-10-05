@@ -1,0 +1,27 @@
+.swiper {
+    height: 100%;
+    overflow: hidden;
+    transition: translate3d 0.3s ease;
+    position:relative;
+}
+.item {
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    float: left;
+
+    &.active{
+        .animated{
+            animation-fill-mode: both;
+            opacity: 1;
+        }
+    }
+    &:not(.active){
+        .animated{
+            animation: none;
+            opacity: 0;
+        }
+    }
+}

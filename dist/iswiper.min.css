@@ -1,0 +1,1 @@
+.item,.swiper{height:100%;position:relative;overflow:hidden}.swiper{-webkit-transition:translate3d .3s ease;transition:translate3d .3s ease}.item{background-position:center center;background-size:cover;float:left}.item.active .animated{-webkit-animation-fill-mode:both;animation-fill-mode:both;opacity:1}.item:not(.active) .animated{-webkit-animation:none;animation:none;opacity:0}
