@@ -270,7 +270,7 @@
      * 支持正向无限循环
      */
     function isLoop(index, swiper){
-        if(index == 4){
+        if(index == swiper.count){
             var duration = '0ms';
 
             swiper.$container.style['-webkit-transition'] = duration;
