@@ -5,7 +5,6 @@
         this[name] = definition();
     }
 })('Swiper', function() {
-
     /**
      *
      * @param options
@@ -19,7 +18,9 @@
             direction: 'horizontal',
             activeClass: 'active',
             threshold: 30,
-            duration: 300
+            duration: 300,
+            isloop:false,
+            loopTime:5000
         };
         this._options = extend(this._default, options);
         this._start = {};
@@ -45,10 +46,11 @@
         this._copy();
         this._init();
         this._bind();
+        this._marquee();
     }
 
     /**
-     * copy first item for unlimited rotation
+     * copy first item for marquee loop
      *
      */
     Swiper.prototype._copy = function() {
@@ -57,6 +59,26 @@
 
         me.$container.appendChild(cloneNode);
     };
+
+    /**
+     * marquee loop
+     */
+    Swiper.prototype._marquee = function(){
+        if(this._options.isloop === false){
+            return;
+        }
+
+        var me = this;
+        var loopTime = me._options.loopTime;
+        var nextIndex = -1;
+
+        var loop = setInterval(function(){
+            nextIndex = me._current + 1;
+
+            me._show(nextIndex);
+            me._current++;
+        }, loopTime);
+    }
 
     /**
      * initial
