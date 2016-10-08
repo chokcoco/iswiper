@@ -23,7 +23,7 @@
 </script>
 ```
 
-### API
+## API
 ```javascript
 new Swiper({
   // 容器
@@ -34,7 +34,7 @@ new Swiper({
   direction: 'vertical',
   // 激活态 className
   activeClass: 'active',
-  // 默认不无限首尾相连
+  // 默认不无限首尾相连（即是滑到左右两端不可继续滑动）
   infinite: false,
   // 滑动切换距离阀值
   threshold: 30,
@@ -42,7 +42,7 @@ new Swiper({
   duration: 300,
   // 自动切换，默认为 false，自动切换必须 infinite:true
   autoSwitch: false,
-  // 切换间隔
+  // 自动切换间隔时长
   loopTime: 5000
 })
 ```
