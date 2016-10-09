@@ -281,9 +281,7 @@
       }
     });
 
-    console.log(this._options.activeClass)
     if(this._options.progressBar){
-      console.log(11);
       Array.prototype.forEach.call(this.$progressItems, function($item, key) {
         $item.classList.remove(clazz);
         if (index === key) {

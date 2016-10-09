@@ -29,11 +29,6 @@ gulp.task('build', function () {
         .pipe(gulp.dest('dist'));
 
     gulp.src('src/iswiper.js')
-        .pipe(tap(function(file, t){
-            var contents = file.contents.toString();
-            contents = contents.replace('${version}', pkg.version);
-            file.contents = new Buffer(contents);
-        }))
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
         .pipe(gulp.dest('dist'))
