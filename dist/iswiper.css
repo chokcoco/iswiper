@@ -1,3 +1,7 @@
+.container {
+  position: relative;
+  width: 100%;
+}
 .swiper {
   height: 100%;
   overflow: hidden;
@@ -22,4 +26,32 @@
   -webkit-animation: none;
           animation: none;
   opacity: 0;
+}
+.progress-bar {
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  bottom: 10px;
+  z-index: 100;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.progress-bar i {
+  margin-right: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.progress-bar i.active {
+  background-color: #ffffff;
+}
+.progress-bar i:last-child {
+  margin-right: 0px;
 }

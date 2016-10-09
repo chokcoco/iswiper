@@ -11,7 +11,7 @@
    * @constructor
    */
   function Swiper(options) {
-    this.version = '1.0.1';
+    this.version = '1.0.2';
     this._default = {
       // 容器
       container: '.swiper',
@@ -26,12 +26,17 @@
       // 滑动切换距离阀值
       threshold: 30,
       // 切换动画时间
-      duration: 300,
+      duration: 600,
       // 自动切换，默认为 false，自动切换必须 infinite:true
       autoSwitch: false,
       // 切换间隔
-      loopTime: 5000
+      loopTime: 5000,
+      // 缓动函数，默认为 linear，可传入 cubic-bezier()
+      easing: "linear",
+      // 进度条，且需要加上进度条 html 代码
+      progressBar:false
     };
+
     this._options = extend(this._default, options);
     this._start = {};
     this._move = {};
@@ -42,16 +47,22 @@
     this._goto = -1;
     this._eventHandlers = {};
     this._loop = 0;
+    this._lock = false;
 
     this.$container = document.querySelector(this._options.container);
     this.$items = this.$container.querySelectorAll(this._options.item);
     this.count = this.$items.length;
 
+    if(this._options.progressBar){
+      this.$progressBar = document.querySelector('.progress-bar');
+      this.$progressItems = this.$progressBar.querySelectorAll('i');
+    }
 
     this._width = this.$container.offsetWidth;
     this._height = this.$container.offsetHeight;
     this._loopWidth = this.count * this._width;
     this._loopHeight = this.count * this._height;
+
 
     this._copy();
     this._init();
@@ -95,7 +106,8 @@
       nextIndex = me._current + 1;
 
       me._show(nextIndex);
-      me._current++;
+      me._prev = me._current++;
+
     }, loopTime);
   };
 
@@ -136,6 +148,10 @@
     var me = this;
 
     this.$container.addEventListener('touchstart', function(e) {
+      if (me._lock) {
+        return;
+      }
+
       me._start.x = e.changedTouches[0].pageX;
       me._start.y = e.changedTouches[0].pageY;
 
@@ -145,6 +161,10 @@
     }, false);
 
     this.$container.addEventListener('touchmove', function(e) {
+      if (me._lock) {
+        return;
+      }
+
       me._move.x = e.changedTouches[0].pageX;
       me._move.y = e.changedTouches[0].pageY;
 
@@ -163,9 +183,12 @@
     }, false);
 
     this.$container.addEventListener('touchend', function(e) {
+      if (me._lock) {
+        return;
+      }
+
       me._end.x = e.changedTouches[0].pageX;
       me._end.y = e.changedTouches[0].pageY;
-
 
       var distance = me._end.y - me._start.y;
       if (me._options.direction === 'horizontal') {
@@ -173,6 +196,7 @@
       }
 
       me._prev = me._current;
+
       if (distance > me._options.threshold) {
         // is infinite false or true
         if (me._options.infinite === false) {
@@ -198,6 +222,8 @@
     this.$container.addEventListener('webkitTransitionEnd', function(e) {
       isLoop(me._current, me);
 
+      me._lock = !me._lock;
+
       if (e.target !== me.$container) {
         return false;
       }
@@ -218,20 +244,26 @@
    * @private
    */
   Swiper.prototype._show = function(index) {
-    this._offset = index * this._height  + (this._loop * this._loopHeight);
-    var transform = 'translate3d(0, ' + (-1 *this._offset) + 'px, 0)';
+    if (this._lock) {
+      return;
+    }
+
+    this._lock = !this._lock;
+    this._offset = index * this._height;
+    var transform = 'translate3d(0, ' + (-1 * this._offset) + 'px, 0)';
 
     if (this._options.direction === 'horizontal') {
-      this._offset = index * this._width + (this._loop * this._loopWidth);
+      this._offset = index * this._width;
       transform = 'translate3d(' + (-1 * this._offset) + 'px, 0, 0)';
     }
 
-    var duration = this._options.duration + 'ms';
+    var duration = this._options.duration + 'ms ' + this._options.easing;
 
     this.$container.style['-webkit-transition'] = duration;
     this.$container.style.transition = duration;
     this.$container.style['-webkit-transform'] = transform;
     this.$container.style.transform = transform;
+
   };
 
   /**
@@ -240,15 +272,25 @@
    * @private
    */
   Swiper.prototype._activate = function(index) {
-    // index = index === -1 ? this.count-1 : index;
-
     var clazz = this._options.activeClass;
+
     Array.prototype.forEach.call(this.$items, function($item, key) {
       $item.classList.remove(clazz);
       if (index === key) {
         $item.classList.add(clazz);
       }
     });
+
+    console.log(this._options.activeClass)
+    if(this._options.progressBar){
+      console.log(11);
+      Array.prototype.forEach.call(this.$progressItems, function($item, key) {
+        $item.classList.remove(clazz);
+        if (index === key) {
+          $item.classList.add(clazz);
+        }
+      });
+    }
   };
 
   /**
@@ -327,32 +369,40 @@
     }
 
     var duration = '0ms';
+    var transform = "";
+
     swiper.$container.style['-webkit-transition'] = duration;
     swiper.$container.style.transition = duration;
 
     // swiper most right
     if (index == swiper.count) {
-      var distance = swiper._height * swiper.count * (swiper._loop + 1) - swiper._height;
+      transform = 'translate3d(0, 0, 0)';
 
       if (swiper._options.direction === 'horizontal') {
-        distance = swiper._width * swiper.count * (swiper._loop + 1) - swiper._width;
+        transform = 'translate3d(0, 0, 0)';
       }
 
-      swiper.$container.style.left = distance + 'px' ;
+      swiper.$container.style['-webkit-transform'] = transform;
+      swiper.$container.style.transform = transform;
+
+      swiper._offset = 0;
       swiper._current = 0;
-      swiper._loop++;
 
     // swiper most left
     }else if(index == -1){
-      var distance = swiper._height * swiper.count * (swiper._loop - 1) - swiper._height;
+      var distance = (swiper.count - 1) * swiper._height;
+      transform = 'translate3d(0, -'+ distance +'px, 0)';
 
       if (swiper._options.direction === 'horizontal') {
-        distance = swiper._width * swiper.count * (swiper._loop - 1) - swiper._width;
+        distance = (swiper.count - 1) * swiper._width;
+        transform = 'translate3d(-'+ distance +'px, 0, 0)';
       }
 
-      swiper.$container.style.left = distance + 'px' ;
+      swiper.$container.style['-webkit-transform'] = transform;
+      swiper.$container.style.transform = transform;
+
+      swiper._offset = distance;
       swiper._current = swiper.count - 1;
-      swiper._loop--;
     }
   }
 

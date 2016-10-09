@@ -23,6 +23,12 @@
             <img src="http://file27.mafengwo.net/M00/B2/12/wKgB6lO0ahWAMhL8AAV1yBFJDJw20.jpeg">
         </div>
     </div>
+    <div class="progress-bar">
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+    </div>
 </div>
 <script src="../iswiper.js"></script>
 <script>
@@ -32,7 +38,11 @@
         // 自动切换，自动切换必须同时 infinite:true
         autoSwitch:true,
         // 首尾循环
-        infinite:true
+        infinite:true,
+        // 缓动
+        easing:"cubic-bezier(.10, .71, .39, .93)",
+        // 进度条
+        progressBar:true
     });
 </script>
 </body>

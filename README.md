@@ -2,22 +2,36 @@
 
 小巧轻量的移动端滑动插件，支持首尾相连无限滑动，支持自动滑动。
 
+## 使用
+
+引入 `iswiper.css` 及 'iswiper.js'。
+
 ```html
-<div class="swiper">
-  <div class="item">
-      <img src="xxx1.jpg">
+<div class="container">
+  <!-- 滑动结构 -->
+  <div class="swiper">
+    <div class="item">
+        <img src="xxx1.jpg">
+    </div>
+    <div class="item">
+        <img src="xxx2.jpg">
+    </div>
+    <div class="item">
+        <img src="xxx3.jpg">
+    </div>
+    <div class="item">
+        <img src="xxx4.jpg">
+    </div>
   </div>
-  <div class="item">
-      <img src="xxx2.jpg">
-  </div>
-  <div class="item">
-      <img src="xxx3.jpg">
-  </div>
-  <div class="item">
-      <img src="xxx4.jpg">
+  <!-- 进度条结构 -->
+  <div class="progress-bar">
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
   </div>
 </div>
-<script src="../swiper.js"></script>
+
 <script>
   window.swiper = new Swiper();
 </script>
@@ -34,16 +48,20 @@ new Swiper({
   direction: 'vertical',
   // 激活态 className
   activeClass: 'active',
-  // 默认不无限首尾相连（即是滑到左右两端不可继续滑动）
+  // 默认不无限首尾相连
   infinite: false,
   // 滑动切换距离阀值
   threshold: 30,
   // 切换动画时间
-  duration: 300,
+  duration: 600,
   // 自动切换，默认为 false，自动切换必须 infinite:true
   autoSwitch: false,
-  // 自动切换间隔时长
-  loopTime: 5000
+  // 切换间隔
+  loopTime: 5000,
+  // 缓动函数，默认为 linear，可传入 cubic-bezier()
+  easing: "linear",
+  // 进度条，且需要加上进度条 html 代码
+  progressBar:false
 })
 ```
 
