@@ -33,7 +33,7 @@
       loopTime: 5000,
       // 缓动函数，默认为 linear，可传入 cubic-bezier()
       easing: "linear",
-      // 进度条，且需要加上进度条 html 代码
+      // 进度条，默认没有进度条，可选 true 且需要加上进度条 html 代码
       progressBar:false
     };
 
