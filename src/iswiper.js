@@ -103,11 +103,17 @@
     var nextIndex = -1;
 
     var loop = setInterval(function() {
+      // 防止setInterval运行在后台而动画没有运行
+      if(nextIndex > me.count){
+        this._lock = 0;
+        me._offset = 0;
+        me._current = 0;
+      }
+
       nextIndex = me._current + 1;
 
       me._show(nextIndex);
       me._prev = me._current++;
-
     }, loopTime);
   };
 
@@ -250,6 +256,7 @@
 
     this._lock = !this._lock;
     this._offset = index * this._height;
+
     var transform = 'translate3d(0, ' + (-1 * this._offset) + 'px, 0)';
 
     if (this._options.direction === 'horizontal') {
