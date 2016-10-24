@@ -1,3 +1,9 @@
+/**
+ * @name iswiper1.0.2
+ * @auchor Coco
+ * @contact QQ 308695699
+ * @license MIT License
+ */
 (function(name, definition) {
   if (typeof define === 'function') {
     define(definition);
