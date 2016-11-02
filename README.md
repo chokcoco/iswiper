@@ -23,7 +23,7 @@
         <img src="xxx4.jpg">
     </div>
   </div>
-  <!-- 进度条结构 -->
+  <!-- 进度条结构，可选 -->
   <div class="progress-bar">
     <i></i>
     <i></i>
