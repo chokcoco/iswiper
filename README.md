@@ -11,19 +11,19 @@
   <!-- 滑动结构 -->
   <div class="swiper">
     <div class="item">
-        <img src="xxx1.jpg">
+        <!--内部结构-->
     </div>
     <div class="item">
-        <img src="xxx2.jpg">
+        <!--内部结构-->
     </div>
     <div class="item">
-        <img src="xxx3.jpg">
+        <!--内部结构-->
     </div>
     <div class="item">
-        <img src="xxx4.jpg">
+        <!--内部结构-->
     </div>
   </div>
-  <!-- 进度条结构 -->
+  <!-- 进度条结构，可选 -->
   <div class="progress-bar">
     <i></i>
     <i></i>
