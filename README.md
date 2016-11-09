@@ -81,7 +81,7 @@ var swiper = new Swiper({
     swiper.go(1);
 ```
 
-- resetLoop`: 重置滚动轮播
+- `resetLoop`: 重置滚动轮播
 
 ```
     var swiper = new Swiper();
