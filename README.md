@@ -37,7 +37,7 @@
 </script>
 ```
 
-## API
+## 接口方法
 ```javascript
 var swiper = new Swiper({
   // 容器
@@ -64,8 +64,6 @@ var swiper = new Swiper({
   progressBar:false
 })
 ```
-
-## 接口方法
 
 - `next`: 滑动到到下一屏
 
