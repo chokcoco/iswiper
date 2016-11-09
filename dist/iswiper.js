@@ -46,8 +46,8 @@
     this._offset = 0;
     this._goto = -1;
     this._eventHandlers = {};
-    this._loop = 0;
     this._lock = false;
+    this._loopInterval = null;
 
     this.$container = document.querySelector(this._options.container);
     this.$items = this.$container.querySelectorAll(this._options.item);
@@ -102,7 +102,7 @@
     var loopTime = me._options.loopTime;
     var nextIndex = -1;
 
-    var loop = setInterval(function() {
+    this._loopInterval = setInterval(function() {
       // 防止setInterval运行在后台而动画没有运行
       if(nextIndex > me.count){
         this._lock = 0;
@@ -297,6 +297,33 @@
       });
     }
   };
+
+  /**
+   * reset loop
+   * @return {*}
+   */
+  Swiper.prototype.resetLoop = function(){
+    clearInterval(this._loopInterval);
+
+    var transform = 'translate3d(0, 0, 0)';
+    var duration = '0ms';
+
+    this._activate(0);
+
+    this.$container.style['-webkit-transition'] = duration;
+    this.$container.style.transition = duration;
+    this.$container.style['-webkit-transform'] = transform;
+    this.$container.style.transform = transform;
+
+    this._prev = 0;
+    this._current = 0;
+    this._offset = 0;
+    this._goto = -1;
+    this._lock = false;
+    this._loopInterval = null;
+
+    this._marquee();
+  }
 
   /**
    * goto x page
