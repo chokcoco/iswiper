@@ -15,7 +15,7 @@ gulp.task('build', function () {
     gulp.src('src/example/**/*')
         .pipe(gulp.dest('dist/example'));
 
-    gulp.src('src/iswiper.less')
+    gulp.src('src/*.less')
         .pipe(less().on('error', function (e){
             console.error(e.message);
             this.emit('end');
@@ -28,7 +28,7 @@ gulp.task('build', function () {
         }))
         .pipe(gulp.dest('dist'));
 
-    gulp.src('src/iswiper.js')
+    gulp.src('src/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
         .pipe(gulp.dest('dist'))
