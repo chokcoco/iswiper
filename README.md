@@ -37,9 +37,9 @@
 </script>
 ```
 
-## API
+## 接口方法
 ```javascript
-new Swiper({
+var swiper = new Swiper({
   // 容器
   container: '.swiper',
   // 每页 className
@@ -63,6 +63,27 @@ new Swiper({
   // 进度条，默认没有进度条，可选 true 且需要加上进度条 html 代码
   progressBar:false
 })
+```
+
+- `next`: 滑动到到下一屏
+
+```
+    var swiper = new Swiper();
+    swiper.next();
+```
+
+- `go`: 主动滑动到指定界面。
+
+```
+    var swiper = new Swiper();
+    swiper.go(1);
+```
+
+- `resetLoop`: 重置滚动轮播
+
+```
+    var swiper = new Swiper();
+    swiper.resetLoop();
 ```
 
 ##License
