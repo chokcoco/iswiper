@@ -6,13 +6,15 @@
         this[name] = definition();
     }
 })('Swiper', function () {
+    'use strict';
+
     /**
      *
      * @param options
      * @constructor
      */
     function Swiper(options) {
-        this.version = '1.0.0';
+        this.version = '1.0.1';
         this._default = {
             // 容器
             container: '.swiper',
@@ -57,10 +59,10 @@
         this._bind();
         this._init();
 
-        if(this._options.autoSwitch) {
+        if (this._options.autoSwitch) {
             this._marquee();
         }
-        
+
     }
 
     /**
@@ -121,7 +123,7 @@
                 'z-index': '100'
             };
         }
-    }
+    };
 
     /**
      * initial
@@ -131,13 +133,10 @@
         var me = this;
         var duration = this._options.duration + 'ms ' + this._options.easing;
 
-        for (var i = 0; i < 3; i++) {
-            (function (j) {
-                var elem = me.$items[j];
-                elem.style['-webkit-transition'] = duration;
-                elem.style.transition = duration;
-            })(i)
-        }
+        Array.prototype.forEach.call(this.$items, function (elem) {
+            elem.style['-webkit-transition'] = duration;
+            elem.style.transition = duration;
+        });
     };
 
     /**
@@ -166,17 +165,14 @@
 
         this._setCssParams();
 
-        for (var i = 0; i < 3; i++) {
-            (function (j) {
-                var elem = me.$items[j];
-                var curState = elem.getAttribute('class').split(' ')[1];
-                var curCssName = '_' + curState + 'TransformCss';
+        Array.prototype.slice.call(this.$items).forEach(function (elem) {
+            var curState = elem.getAttribute('class').split(' ')[1];
+            var curCssName = '_' + curState + 'TransformCss';
 
-                for (var key in me[curCssName]) {
-                    me['$' + curState + 'Elem'].style[key] = me[curCssName][key];
-                }
-            })(i);
-        }
+            for (var key in me[curCssName]) {
+                me['$' + curState + 'Elem'].style[key] = me[curCssName][key];
+            }
+        });
     };
 
     /**
@@ -252,8 +248,8 @@
                 // counterclockwise Or clockwise
                 if (distance < me._options.threshold) {
                     me._defaultTurn = "counterclockwise";
-                }else {
-                    me._defaultTurn = "clockwise";   
+                } else {
+                    me._defaultTurn = "clockwise";
                 }
 
                 // new move
@@ -263,23 +259,19 @@
 
 
         // add event listen to every li
-        for (var i = 0; i < 3; i++) {
-            (function (j) {
-                var elem = me.$items[j];
+        Array.prototype.slice.call(me.$items).forEach(function (elem) {
+            elem.addEventListener('webkitTransitionEnd', function (e) {
+                var propertyName = e.propertyName;
 
-                elem.addEventListener('webkitTransitionEnd', function (e) {
-                    var propertyName = e.propertyName;
+                if (propertyName === "transform") {
+                    var curState = elem.getAttribute('class').split(' ')[1];
 
-                    if (propertyName === "transform") {
-                        var curState = elem.getAttribute('class').split(' ')[1];
-
-                        me._classChange(curState);
-                        me._count++;
-                        me._domSelectorReset();
-                    }
-                }, false);
-            })(i)
-        }
+                    me._classChange(curState);
+                    me._count++;
+                    me._domSelectorReset();
+                }
+            }, false);
+        });
     };
 
     /**
@@ -301,7 +293,7 @@
                 this._marquee();
             }
         }
-    }
+    };
 
     /**
      * simple `extend` method
