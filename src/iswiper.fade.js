@@ -18,7 +18,7 @@
             container: '.swiper',
             // 每页 className
             item: '.item',
-            // next item
+            // next
             next: '.next',
             // active
             active: '.active',
@@ -27,11 +27,11 @@
             // 滑动切换距离阀值
             threshold: 30,
             // 切换动画时间
-            duration: 1000,
+            duration: 500,
             // 自动切换，默认为 false，自动切换必须 infinite:true
-            autoSwitch: false,
+            autoSwitch: true,
             // 切换间隔
-            loopTime: 5000,
+            loopTime: 3000,
             // 缓动函数，默认为 linear，可传入 cubic-bezier()
             easing: "linear",
             // 转向，默认为顺时针，可选逆时针 'counterclockwise'
@@ -52,10 +52,15 @@
         this._lock = false;
         this._marqueeInterval = null;
         this._isIntervene = false;
+        this._defaultTurn = this._options.turn;
 
         this._bind();
         this._init();
-        this._marquee();
+
+        if(this._options.autoSwitch) {
+            this._marquee();
+        }
+        
     }
 
     /**
@@ -63,14 +68,14 @@
      */
     Swiper.prototype._setCssParams = function () {
         // 顺时针
-        if (this._options.turn === 'clockwise') {
+        if (this._defaultTurn === 'clockwise') {
             // three different states
             this._activeTransformCss = {
                 '-webkit-transform': 'scale(0.9) translateX(10px)',
                 'transform': 'scale(0.9) translateX(10px)',
                 '-webkit-transform-origin': 'right center',
                 'transform-origin': 'right center',
-                'opacity': '0.6',
+                'opacity': '0.5',
                 'z-index': '1'
             };
             this._nextTransformCss = {
@@ -86,7 +91,7 @@
                 'transform': 'scale(0.9) translateX(-10px)',
                 '-webkit-transform-origin': 'left center',
                 'transform-origin': 'left center',
-                'opacity': '0.6',
+                'opacity': '0.5',
                 'z-index': '10'
             };
         } else {
@@ -96,7 +101,7 @@
                 'transform': 'scale(0.9) translateX(-10px)',
                 '-webkit-transform-origin': 'left center',
                 'transform-origin': 'left center',
-                'opacity': '0.6',
+                'opacity': '0.5',
                 'z-index': '10'
             };
             this._nextTransformCss = {
@@ -104,7 +109,7 @@
                 'transform': 'scale(0.9) translateX(10px)',
                 '-webkit-transform-origin': 'right center',
                 'transform-origin': 'right center',
-                'opacity': '0.6',
+                'opacity': '0.5',
                 'z-index': '1'
             };
             this._prevTransformCss = {
@@ -180,7 +185,7 @@
     Swiper.prototype._classChange = function (curState) {
         var me = this;
 
-        if (me._options.turn === "clockwise") {
+        if (me._defaultTurn === "clockwise") {
             switch (true) {
                 case curState === 'active':
                     me.$activeElem.setAttribute('class', 'item prev');
@@ -244,9 +249,11 @@
                 // change the intervene flag
                 me._isIntervene = true;
 
+                // counterclockwise Or clockwise
                 if (distance < me._options.threshold) {
-                    // change the turn 
-                    me._options.turn = "counterclockwise";
+                    me._defaultTurn = "counterclockwise";
+                }else {
+                    me._defaultTurn = "clockwise";   
                 }
 
                 // new move
@@ -287,10 +294,10 @@
 
             this._count = 0;
             this._lock = false;
-            this._options.turn = "clockwise";
+            this._defaultTurn = this._options.turn;
 
             // open the auto loop again
-            if (this._isIntervene) {
+            if (this._isIntervene && this._options.autoSwitch) {
                 this._marquee();
             }
         }
