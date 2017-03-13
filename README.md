@@ -9,9 +9,9 @@
 
 保留最基本的功能，提供最大限度的拓展。
 
-## 使用
+## Use
 
-引入 `iswiper.css` 及 `iswiper.js`.
+引入 `iswiper.css` 及 `iswiper.js` 。支持 AMD 、CMD 规范。
 
 ```html
 <div class="container">
@@ -40,11 +40,11 @@
 </div>
 
 <script>
-  window.swiper = new Swiper();
+  var swiper = new Swiper();
 </script>
 ```
 
-## 接口方法
+## API
 ```javascript
 var swiper = new Swiper({
   // 容器
@@ -69,26 +69,26 @@ var swiper = new Swiper({
   easing: "linear",
   // 进度条，默认没有进度条，可选 true 且需要加上进度条 html 代码
   progressBar:false
-})
+});
 ```
 
 - `next`: 滑动到到下一屏
 
-```
+```javascript
     var swiper = new Swiper();
     swiper.next();
 ```
 
 - `go`: 主动滑动到指定界面。
 
-```
+```javascript
     var swiper = new Swiper();
     swiper.go(1);
 ```
 
 - `resetLoop`: 重置滚动轮播
 
-```
+```javascript
     var swiper = new Swiper();
     swiper.resetLoop();
 ```
