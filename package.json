@@ -1,5 +1,5 @@
 {
-  "name": "iswiper",
+  "name": "mobile_iswiper",
   "version": "1.0.3",
   "description": "iswiper.js, a mobile touch slider plug",
   "main": "./src/iswiper.js",

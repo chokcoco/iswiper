@@ -1,8 +1,6 @@
-![build passing](https://img.shields.io/travis/USER/REPO.svg)![npm_version](https://img.shields.io/npm/v/mobile_iswiper.svg)![License](https://img.shields.io/npm/l/express.svg)
-
 ##iswiper
 
-一款小而美的轻量级、高性能移动端滑动插件。
+小巧的移动端滑动插件，小而美，高性能。
 
 保留最基本的功能，提供最大限度的拓展。
 
@@ -12,20 +10,6 @@
 - 支持无限轮播
 - 支持手势
 - 支持进度条
-
-## Build
-
-使用 Gulp 构建，可查看完整 Demo。安装包：
-
-```
-$ npm install mobile_iswiper
-```
-
-运行：
-
-```
-$ npm start
-```
 
 ## Use
 
