@@ -1,6 +1,6 @@
-![build passing](https://img.shields.io/travis/USER/REPO.svg)![npm_version](https://img.shields.io/npm/v/mobile_iswiper.svg)![License](https://img.shields.io/npm/l/express.svg)
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](https://github.com/chokcoco/iswiper)![npm_version](https://img.shields.io/npm/v/mobile_iswiper.svg)![License](https://img.shields.io/npm/l/express.svg)
 
-##iswiper
+#iswiper
 
 一款小而美的轻量级、高性能移动端滑动插件。
 
