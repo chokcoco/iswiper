@@ -1,4 +1,4 @@
-[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](https://github.com/chokcoco/iswiper)![npm_version](https://img.shields.io/npm/v/mobile_iswiper.svg)![License](https://img.shields.io/npm/l/express.svg)
+![npm_version](https://img.shields.io/npm/v/mobile_iswiper.svg)[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](https://github.com/chokcoco/iswiper)![License](https://img.shields.io/npm/l/express.svg)
 
 #iswiper
 
