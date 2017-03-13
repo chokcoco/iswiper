@@ -1,8 +1,9 @@
 {
   "name": "iswiper",
-  "version": "1.0.2",
-  "description": "iswiper.js",
-  "author": "coco",
+  "version": "1.0.3",
+  "description": "iswiper.js, a mobile touch slider plug",
+  "main": "./src/iswiper.js",
+  "author": "Coco",
   "scripts": {
     "start": "gulp"
   },

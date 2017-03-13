@@ -1,13 +1,17 @@
 ##iswiper -- 移动端滑动插件
 
-两款小巧的移动端滑动插件，支持无限轮播滚动，小而美，性能极致
+小巧的移动端滑动插件，小而美，性能极致。
 
-+ iswiper.js
-+ iswiper.fade.js
+- 支持横屏、竖屏
+- 支持无限轮播
+- 支持手势
+- 支持进度条
+
+保留最基本的功能，提供最大限度的拓展。
 
 ## 使用
 
-引入 `iswiper.css` 及 `iswiper.js`
+引入 `iswiper.css` 及 `iswiper.js`.
 
 ```html
 <div class="container">

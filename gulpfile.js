@@ -13,7 +13,7 @@ var pkg = require('./package.json');
 
 gulp.task('build', function () {
     gulp.src('src/example/**/*')
-        .pipe(gulp.dest('dist/example'));
+        .pipe(gulp.dest('test/example'));
 
     gulp.src('src/*.less')
         .pipe(less().on('error', function (e){
@@ -21,28 +21,28 @@ gulp.task('build', function () {
             this.emit('end');
         }))
         .pipe(autoprefixer())
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('output'))
         .pipe(minify())
         .pipe(rename(function (file){
             file.basename += '.min';
         }))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('output'));
 
     gulp.src('src/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('output'))
         .pipe(uglify())
         .pipe(rename(function (file){
             file.basename += '.min';
         }))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('output'));
 });
 
 gulp.task('server', function () {
     browserSync.init({
         server: {
-            baseDir: "./dist"
+            baseDir: "."
         },
         ui: {
             port: 8081,
@@ -51,7 +51,7 @@ gulp.task('server', function () {
             }
         },
         port: 8080,
-        startPath: '/example'
+        startPath: '/test/example'
     });
 });
 

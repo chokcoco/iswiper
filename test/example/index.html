@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <title>iSwiper</title>
-    <link rel="stylesheet" href="../iswiper.css"/>
-    <link rel="stylesheet" href="example.css"/>
+    <link rel="stylesheet" href="../../output/iswiper.css"/>
 </head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+.container{
+    height: 400px;
+    background-color: #efeff4;
+}
+.item{
+    color: #ffffff;
+    background-color: #000000;
+}
+.item img{
+    width:100%;
+    height:100%;
+}
+</style>
 <body>
 <div class="container">
     <div class="swiper">
@@ -30,7 +52,7 @@
         <i></i>
     </div>
 </div>
-<script src="../iswiper.js"></script>
+<script src="../../output/iswiper.js"></script>
 <script>
     window.swiper = new Swiper({
         // 横屏切换
