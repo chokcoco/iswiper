@@ -111,6 +111,6 @@ var swiper = new Swiper({
     swiper.resetLoop();
 ```
 
-##License
+## License
 
 MIT
